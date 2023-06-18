@@ -5,6 +5,6 @@ export const trendingDay = async () => {
     `https://api.themoviedb.org/3/trending/all/day?api_key=${API_KEY}`
   );
   const data = await response.json();
-  console.log(data);
+
   return data;
 };
