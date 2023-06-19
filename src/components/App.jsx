@@ -31,6 +31,7 @@ export const App = () => {
             <Route path="cast" element={<Cast />} />
             <Route path="revies" element={<Reviews />} />
           </Route>
+          <Route path="*" element={<Home data={films} />} />
         </Routes>
       </Suspense>
     </>
