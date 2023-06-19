@@ -2,6 +2,7 @@ import { lazy, Suspense, useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
 
 import { trendingDay } from './API/api';
+import { Header } from './Header/Header';
 
 const Home = lazy(() => import('./Home/Home'));
 const MovieDetails = lazy(() => import('./MovieDetails/MovieDetails'));
@@ -20,15 +21,18 @@ export const App = () => {
   getFilms();
 
   return (
-    <Suspense fallback={<div>Loading...</div>}>
-      <Routes>
-        <Route path="/" element={<Home data={films} />} />
-        <Route path="/movies" element={<Movies />} />
-        <Route path="/movies/:movieId" element={<MovieDetails />}>
-          <Route path="cast" element={<Cast />} />
-          <Route path="revies" element={<Reviews />} />
-        </Route>
-      </Routes>
-    </Suspense>
+    <>
+      <Header />
+      <Suspense fallback={<div>Loading...</div>}>
+        <Routes>
+          <Route path="/" element={<Home data={films} />} />
+          <Route path="/movies" element={<Movies />} />
+          <Route path="/movies/:movieId" element={<MovieDetails />}>
+            <Route path="cast" element={<Cast />} />
+            <Route path="revies" element={<Reviews />} />
+          </Route>
+        </Routes>
+      </Suspense>
+    </>
   );
 };

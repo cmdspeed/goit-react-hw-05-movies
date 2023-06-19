@@ -1,0 +1,15 @@
+.navLink {
+    margin: 5px;
+    font-size: 1.5rem;
+    text-decoration: none;
+    color: black
+}
+
+.topMenu {
+    margin: 10px;
+}
+
+
+.navLink:hover {
+    color: rgb(173, 167, 167)
+}
