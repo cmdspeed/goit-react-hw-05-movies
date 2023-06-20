@@ -8,3 +8,11 @@ export const trendingDay = async () => {
 
   return data;
 };
+
+export const movieInfo = async id => {
+  const response = await fetch(
+    `https://api.themoviedb.org/3/movie/${id}?api_key=${API_KEY}`
+  );
+  const data = await response.json();
+  return data;
+};

@@ -1,0 +1,20 @@
+.detailsContainer,
+.genres {
+    display: flex;
+}
+
+.title,
+.userScore,
+.overview,
+.additional {
+    margin-left: 30px;
+}
+
+.genres {
+    flex-direction: row;
+    list-style: none;
+}
+
+.genres li {
+    margin-right: 10px;
+}
