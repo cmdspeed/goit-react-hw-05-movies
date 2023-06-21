@@ -1,6 +1,8 @@
 import { Link } from 'react-router-dom';
-const Home = data => {
-  const films = data.data;
+import { trendingDay } from 'components/API/api';
+const data = await trendingDay();
+const Home = () => {
+  const films = data.results;
   return (
     <section>
       <h2>Trending today</h2>

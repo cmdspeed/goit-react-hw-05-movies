@@ -37,16 +37,18 @@ const MovieDetails = () => {
               <li key={id}>{name}</li>
             ))}
           </ul>
-          <p className={css.additional}>Additional information</p>
-          <ul>
-            <li>
-              <Link to="cast">Cast</Link>
-            </li>
-            <li>
-              <Link to="reviews">Reviews</Link>
-            </li>
-          </ul>
         </div>
+      </div>
+      <div className={css.border}>
+        <p className={css.additional}>Additional information</p>
+        <ul>
+          <li>
+            <Link to="cast">Cast</Link>
+          </li>
+          <li>
+            <Link to="reviews">Reviews</Link>
+          </li>
+        </ul>
       </div>
       <Outlet />
     </>

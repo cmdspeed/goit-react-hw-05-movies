@@ -18,3 +18,9 @@
 .genres li {
     margin-right: 10px;
 }
+
+.border {
+    margin: 10px auto;
+    border-top: 1px solid grey;
+    border-bottom: 1px solid grey;
+}
