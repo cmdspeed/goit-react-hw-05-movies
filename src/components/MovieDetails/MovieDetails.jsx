@@ -3,6 +3,9 @@ import { movieInfo } from '../API/api';
 import React, { useState, useEffect } from 'react';
 import css from './MovieDetails.module.css';
 
+const POSTER_PLACEHOLDER_URL =
+  'https://img.freepik.com/free-vector/glitch-style-poster_1284-24645.jpg?w=300&t=st=1687363450~exp=1687364050~hmac=c62699308b0e7656912ddd48d9a5df99c7b5de993d3b5d3b02d749643b6d89c1';
+
 const MovieDetails = () => {
   const { movieId } = useParams();
   const [details, setDetails] = useState([]);
@@ -21,7 +24,11 @@ const MovieDetails = () => {
       </Link>
       <div className={css.detailsContainer}>
         <img
-          src={`https://image.tmdb.org/t/p//w300/${details.poster_path}`}
+          src={
+            details.poster_path
+              ? `https://image.tmdb.org/t/p//w300/${details.poster_path}`
+              : POSTER_PLACEHOLDER_URL
+          }
           alt={`${details.title}`}
         ></img>
         <div>
