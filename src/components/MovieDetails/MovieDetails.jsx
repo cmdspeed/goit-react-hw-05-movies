@@ -15,7 +15,7 @@ const MovieDetails = () => {
       setDetails(data);
       setGenres(data.genres);
     });
-  });
+  }, [movieId]);
 
   return (
     <>

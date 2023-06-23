@@ -12,27 +12,31 @@ const Cast = () => {
     movieInfo(movieId, '/credits').then(data => {
       setCast(data.cast);
     });
-  });
+  }, [movieId]);
 
-  return (
-    <div>
-      <ul>
-        {cast.map(({ cast_id, name, profile_path, character }) => (
-          <li key={cast_id}>
-            <img
-              src={
-                profile_path
-                  ? `https://image.tmdb.org/t/p//w200/${profile_path}`
-                  : PLACEHOLDER_PHOTO_URL
-              }
-              alt={`${name}`}
-            />
-            <h3>{name}</h3>
-            <p>charakter: {character}</p>
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
+  if (cast.length) {
+    return (
+      <div>
+        <ul>
+          {cast.map(({ cast_id, name, profile_path, character }) => (
+            <li key={cast_id}>
+              <img
+                src={
+                  profile_path
+                    ? `https://image.tmdb.org/t/p//w200/${profile_path}`
+                    : PLACEHOLDER_PHOTO_URL
+                }
+                alt={`${name}`}
+              />
+              <h3>{name}</h3>
+              <p>charakter: {character}</p>
+            </li>
+          ))}
+        </ul>
+      </div>
+    );
+  }
+  return <div>sorry, don't have information about this section</div>;
 };
+
 export default Cast;
