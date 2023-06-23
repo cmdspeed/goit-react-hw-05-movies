@@ -5,9 +5,12 @@ export const trendingDay = async () => {
   const response = await fetch(
     `${SITE_URL}/trending/all/day?api_key=${API_KEY}`
   );
-  const data = await response.json();
+  if (response.ok) {
+    const data = await response.json();
 
-  return data;
+    return data;
+  }
+  return 'error';
 };
 
 export const movieInfo = async (id, options) => {
