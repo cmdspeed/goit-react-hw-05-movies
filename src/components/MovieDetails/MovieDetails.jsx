@@ -10,55 +10,62 @@ const MovieDetails = () => {
   const { movieId } = useParams();
   const [details, setDetails] = useState([]);
   const [genres, setGenres] = useState([]);
+  const [status, setStatus] = useState('none');
   useEffect(() => {
     movieInfo(movieId).then(data => {
       setDetails(data);
       setGenres(data.genres);
+      if (data !== 'error') {
+        setStatus('ok');
+      }
     });
   }, [movieId]);
 
-  return (
-    <>
-      <Link to="/">
-        <button>⬅ Go back</button>
-      </Link>
-      <div className={css.detailsContainer}>
-        <img
-          src={
-            details.poster_path
-              ? `https://image.tmdb.org/t/p//w300/${details.poster_path}`
-              : POSTER_PLACEHOLDER_URL
-          }
-          alt={`${details.title}`}
-        ></img>
-        <div>
-          <h1 className={css.title}>{details.title}</h1>
-          <p className={css.userScore}>
-            User Score: {details.vote_average * 10}%
-          </p>
-          <h3 className={css.title}>Overview</h3>
-          <p className={css.overview}>{details.overview}</p>
-          <h3 className={css.title}>Genres</h3>
-          <ul className={css.genres}>
-            {genres.map(({ id, name }) => (
-              <li key={id}>{name}</li>
-            ))}
+  if (status === 'ok') {
+    return (
+      <>
+        <Link to="/">
+          <button>⬅ Go back</button>
+        </Link>
+        <div className={css.detailsContainer}>
+          <img
+            src={
+              details.poster_path
+                ? `https://image.tmdb.org/t/p//w300/${details.poster_path}`
+                : POSTER_PLACEHOLDER_URL
+            }
+            alt={`${details.title}`}
+          ></img>
+          <div>
+            <h1 className={css.title}>{details.title}</h1>
+            <p className={css.userScore}>
+              User Score: {details.vote_average * 10}%
+            </p>
+            <h3 className={css.title}>Overview</h3>
+            <p className={css.overview}>{details.overview}</p>
+            <h3 className={css.title}>Genres</h3>
+            <ul className={css.genres}>
+              {genres.map(({ id, name }) => (
+                <li key={id}>{name}</li>
+              ))}
+            </ul>
+          </div>
+        </div>
+        <div className={css.border}>
+          <p className={css.additional}>Additional information</p>
+          <ul>
+            <li>
+              <Link to="cast">Cast</Link>
+            </li>
+            <li>
+              <Link to="reviews">Reviews</Link>
+            </li>
           </ul>
         </div>
-      </div>
-      <div className={css.border}>
-        <p className={css.additional}>Additional information</p>
-        <ul>
-          <li>
-            <Link to="cast">Cast</Link>
-          </li>
-          <li>
-            <Link to="reviews">Reviews</Link>
-          </li>
-        </ul>
-      </div>
-      <Outlet />
-    </>
-  );
+        <Outlet />
+      </>
+    );
+  }
+  return <h2>sorry, there is no access to this data yet </h2>;
 };
 export default MovieDetails;

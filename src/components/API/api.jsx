@@ -14,6 +14,10 @@ export const movieInfo = async (id, options) => {
   const response = await fetch(
     `${SITE_URL}/movie/${id}${options}?api_key=${API_KEY}`
   );
-  const data = await response.json();
-  return data;
+
+  if (response.ok) {
+    const data = await response.json();
+    return data;
+  }
+  return 'error';
 };
