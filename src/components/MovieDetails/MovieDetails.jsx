@@ -1,4 +1,4 @@
-import { Link, Outlet, useParams } from 'react-router-dom';
+import { Link, Outlet, useParams, useLocation } from 'react-router-dom';
 import { movieInfo } from '../API/api';
 import React, { useState, useEffect } from 'react';
 import css from './MovieDetails.module.css';
@@ -11,6 +11,8 @@ const MovieDetails = () => {
   const [details, setDetails] = useState([]);
   const [genres, setGenres] = useState([]);
   const [status, setStatus] = useState('none');
+  const location = useLocation();
+
   useEffect(() => {
     movieInfo(movieId).then(data => {
       setDetails(data);
@@ -24,7 +26,7 @@ const MovieDetails = () => {
   if (status === 'ok') {
     return (
       <>
-        <Link to="/">
+        <Link to={location.state.from}>
           <button>⬅ Go back</button>
         </Link>
         <div className={css.detailsContainer}>
@@ -55,10 +57,14 @@ const MovieDetails = () => {
           <p className={css.additional}>Additional information</p>
           <ul>
             <li>
-              <Link to="cast">Cast</Link>
+              <Link to="cast" state={{ ...location.state }}>
+                Cast
+              </Link>
             </li>
             <li>
-              <Link to="reviews">Reviews</Link>
+              <Link to="reviews" state={{ ...location.state }}>
+                Reviews
+              </Link>
             </li>
           </ul>
         </div>
@@ -66,6 +72,14 @@ const MovieDetails = () => {
       </>
     );
   }
-  return <h2>sorry, there is no access to this data yet </h2>;
+
+  return (
+    <>
+      <Link to={location.state.from}>
+        <button>⬅ Go back</button>
+      </Link>
+      <h2>sorry, there is no access to this data yet </h2>
+    </>
+  );
 };
 export default MovieDetails;

@@ -13,7 +13,7 @@ const Reviews = () => {
       setReviesData(data.results);
     });
   }, [movieId]);
-  console.log(reviewsData);
+
   if (reviewsData.length) {
     return (
       <div>

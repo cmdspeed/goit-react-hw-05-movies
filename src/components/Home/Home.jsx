@@ -1,6 +1,8 @@
 import { Link } from 'react-router-dom';
 import { trendingDay } from 'components/API/api';
+
 const data = await trendingDay();
+
 const Home = () => {
   const films = data.results;
   return (
@@ -10,7 +12,7 @@ const Home = () => {
         {films.map(film => {
           return (
             <li key={film.id}>
-              <Link to={`/movies/${film.id}`}>
+              <Link to={`/movies/${film.id}`} state={{ from: `/` }}>
                 {film.title ? film.title : film.name}
               </Link>
             </li>

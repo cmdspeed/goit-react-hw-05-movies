@@ -24,3 +24,15 @@ export const movieInfo = async (id, options) => {
   }
   return 'error';
 };
+
+export const movieQuery = async query => {
+  const response = await fetch(
+    `${SITE_URL}/search/movie?query=${query}&include_adult=false&api_key=${API_KEY}`
+  );
+
+  if (response.ok) {
+    const data = await response.json();
+    return data;
+  }
+  return 'error';
+};
